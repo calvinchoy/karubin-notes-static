@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":false,"b2t":false,"scrollpercent":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="In this article I will discuss some estimation and velocity concepts when using the Scrum framework. These are often needed in order to answer questions like: How many features can be completed in a s">
+<meta name="keywords" content="scrum,project management">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrum: Estimation and Sizing">
+<meta property="og:url" content="http://notes.karubin.com/14/11/2018/Scrum-Estimation-and-Sizing/index.html">
+<meta property="og:site_name" content="Notes by Karubin">
+<meta property="og:description" content="In this article I will discuss some estimation and velocity concepts when using the Scrum framework. These are often needed in order to answer questions like: How many features can be completed in a s">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-21T18:02:51.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scrum: Estimation and Sizing">
+<meta name="twitter:description" content="In this article I will discuss some estimation and velocity concepts when using the Scrum framework. These are often needed in order to answer questions like: How many features can be completed in a s">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://notes.karubin.com/14/11/2018/Scrum-Estimation-and-Sizing/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Scrum: Estimation and Sizing | Notes by Karubin</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes by Karubin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://notes.karubin.com/14/11/2018/Scrum-Estimation-and-Sizing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karubin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes by Karubin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scrum: Estimation and Sizing
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 14-11-2018 11:34:01" itemprop="dateCreated datePublished" datetime="2018-11-14T11:34:01+01:00">14-11-2018</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 21-07-2019 20:02:51" itemprop="dateModified" datetime="2019-07-21T20:02:51+02:00">21-07-2019</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/project-management/" itemprop="url" rel="index"><span itemprop="name">project management</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>In this article I will discuss some estimation and velocity concepts when using the Scrum framework. These are often needed in order to answer questions like: How many features can be completed in a sprint? How much time (sprints) will it take to finish a release? How much will it cost (time and money). More importantly, doing team based estimation can prevent ambiguitiy and result in better commitment and expectations overall.</p>
+<a id="more"></a>
+
+<h2 id="Why-estimation-is-important"><a href="#Why-estimation-is-important" class="headerlink" title="Why estimation is important"></a>Why estimation is important</h2><ul>
+<li><strong>Size vs count in velocity</strong> - Not all PBIs have the same size, if we calculate the velocity later on with the count we get a skewed velocity. By using sized PBIs we get a better average velocity over time. Estimation comes with time and experience, it’s a skill.</li>
+<li><strong>Promoting discussions</strong> -  Asking teammembers to put a number on something forces conversations so agreements and disagreements surface on time.</li>
+</ul>
+<h2 id="Estimation-levels"><a href="#Estimation-levels" class="headerlink" title="Estimation levels"></a>Estimation levels</h2><p>In most organizations we can estimate on three different levels of details:</p>
+<ul>
+<li>Portfolio backlog</li>
+<li>Product backlog</li>
+<li>Sprint backlog</li>
+</ul>
+<h3 id="Portfolio-backlog-estimation"><a href="#Portfolio-backlog-estimation" class="headerlink" title="Portfolio backlog estimation"></a>Portfolio backlog estimation</h3><p>At this stage we usually don’t have a complete overview of the items. For this stage we can use rough estimation, one method is to use T-shirt size for item estimation in the portfolio backlog: XS, S, M, L, XL etc.</p>
+<h3 id="Product-backlog-estimation"><a href="#Product-backlog-estimation" class="headerlink" title="Product backlog estimation"></a>Product backlog estimation</h3><p>Estimating product backlog items is part of the grooming process. Most teams prefer to use numeric size estimation: story points. Core concepts:</p>
+<ul>
+<li><strong>Estimate as a team</strong> - people doing the work do the estimation (development team), not the product owner and ScrumMaster.</li>
+<li><strong>Estimates are not commitments</strong> - if people need to estimate while taking into commitment expectations from manager the estimates will get bigger and skewed as they want to play safe. This demotivates and result in an inaccurate estimation.</li>
+<li><strong>Focus on accuray, not precision</strong> - too much precission results in diminishing returns of accuracy.</li>
+<li>Use relative sizes - people are better at relative size estimation than absolute estimation.</li>
+<li><strong>Story points</strong> - influenced by several factors including complexity and physical size. Items can be big or small by complexityand/or physically.</li>
+</ul>
+<p>Technique or sizing PBIs as a team: Planning Poker using cards and estimation scale. Often used scale based on a modified Fibonacci sequence or powers:</p>
+<ul>
+<li><strong>Fibonacci</strong> - 1, 2, 3, 5, 8, 13, 20, 40 and 100</li>
+<li><strong>Powers</strong> - 1, 2, 4, 8, 16, 32 …</li>
+</ul>
+<p>When playing planning poker we don’t go for average estimation but for consensus.</p>
+<h3 id="Sprint-backlog-estimation"><a href="#Sprint-backlog-estimation" class="headerlink" title="Sprint backlog estimation"></a>Sprint backlog estimation</h3><p>This is the most detailed level, most teams choose to estimate using <strong>ideal-hours</strong> (a.k.a. effort-hours, man-hours, person-hours etc.). Notice that ideal-hours is not same as elapsed hours. If the estimated ideal hours is 2-hours this doesn’t mean 2 elapsed hour as the 2 ideal hours can be spread throughout several days. It is about the expected effort needed.</p>
+<h2 id="Velocity"><a href="#Velocity" class="headerlink" title="Velocity"></a>Velocity</h2><p>Velocity is the amount of work completed each sprint and can be measured by adding the sized PBIs by the end of the sprint. It is important that it measures the output of <em>what</em> was delivered and not the value.</p>
+<p>Velocity can be used for:</p>
+<ul>
+<li>Planning, how much can be done and how many sprints are needed?</li>
+<li>Diagnostic metric, how good/efficient is the team working. usefull for improve the scrum process. Don’t misuse velocity as performance metric, this can result in wasteful and dangerous behaviour.</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scrum/" rel="tag"># scrum</a>
+          
+            <a href="/tags/project-management/" rel="tag"># project management</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/10/11/2018/Tmux-a-terminal-multiplexer/" rel="next" title="Tmux, a terminal multiplexer">
+                <i class="fa fa-chevron-left"></i> Tmux, a terminal multiplexer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Karubin</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-estimation-is-important"><span class="nav-number">1.</span> <span class="nav-text">Why estimation is important</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Estimation-levels"><span class="nav-number">2.</span> <span class="nav-text">Estimation levels</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Portfolio-backlog-estimation"><span class="nav-number">2.1.</span> <span class="nav-text">Portfolio backlog estimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Product-backlog-estimation"><span class="nav-number">2.2.</span> <span class="nav-text">Product backlog estimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sprint-backlog-estimation"><span class="nav-number">2.3.</span> <span class="nav-text">Sprint backlog estimation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Velocity"><span class="nav-number">3.</span> <span class="nav-text">Velocity</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Karubin</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":false,"b2t":false,"scrollpercent":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="An overview of some popular features in ES6 (ECMAScript6) that are often used. For a complete overview of the specifications you can visit ES6 Standards and ES6 Features.">
+<meta name="keywords" content="javascript,es6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 Fundamentals">
+<meta property="og:url" content="http://notes.karubin.com/06/11/2018/ES6-Fundamentals/index.html">
+<meta property="og:site_name" content="Notes by Karubin">
+<meta property="og:description" content="An overview of some popular features in ES6 (ECMAScript6) that are often used. For a complete overview of the specifications you can visit ES6 Standards and ES6 Features.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-21T18:02:51.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 Fundamentals">
+<meta name="twitter:description" content="An overview of some popular features in ES6 (ECMAScript6) that are often used. For a complete overview of the specifications you can visit ES6 Standards and ES6 Features.">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://notes.karubin.com/06/11/2018/ES6-Fundamentals/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ES6 Fundamentals | Notes by Karubin</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes by Karubin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://notes.karubin.com/06/11/2018/ES6-Fundamentals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karubin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes by Karubin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6 Fundamentals
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 06-11-2018 22:27:54" itemprop="dateCreated datePublished" datetime="2018-11-06T22:27:54+01:00">06-11-2018</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 21-07-2019 20:02:51" itemprop="dateModified" datetime="2019-07-21T20:02:51+02:00">21-07-2019</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>An overview of some popular features in ES6 (ECMAScript6) that are often used. For a complete overview of the specifications you can visit <a href="http://www.ecma-international.org/ecma-262/6.0/" target="_blank" rel="noopener">ES6 Standards</a> and <a href="http://es6-features.org/" target="_blank" rel="noopener">ES6 Features</a>.</p>
+<a id="more"></a>
+
+<h2 id="Arrow-functions"><a href="#Arrow-functions" class="headerlink" title="Arrow functions"></a>Arrow functions</h2><p>ES6 introduces a new syntax for shorter function declaration. This new notation does <strong>not</strong> shadow <code>this</code> and is useful for short callback functions.</p>
+<p>Inside the arrow function, the <code>this</code> binding is not dynamic but is instead lexical. The <code>=&gt;</code> notation replaces the <code>self = this</code> ‘hack’ used for example to access the <code>this</code> binding of the parent context.</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//Expression single parameter notation</span>
+par1 <span class="token operator">=</span><span class="token operator">></span> par1 <span class="token operator">+</span> <span class="token number">1</span>
+
+<span class="token comment" spellcheck="true">//Expression multiple parameters notation</span>
+<span class="token punctuation">(</span>par1<span class="token punctuation">,</span> par2<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> par1 <span class="token operator">*</span> par2
+
+<span class="token comment" spellcheck="true">//Statement bodies</span>
+par1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//body content . . .</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="Variables-and-scoping"><a href="#Variables-and-scoping" class="headerlink" title="Variables and scoping"></a>Variables and scoping</h2><ul>
+<li><code>let</code> is the new <code>var</code> for declaring variables and is scoped without the hoisting.</li>
+<li>Use <code>const</code> to declare constants.</li>
+</ul>
+<h2 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h2><p>Syntactical sugar for creating OOP classes and functionalities. Instead of using the prototype-based inheritance creating classes is now more intuitive and friendly. ES6 classes supports class extension, constructor, instances and super calls.</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//Base class</span>
+<span class="token keyword">class</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+    constructor <span class="token punctuation">(</span>id<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    move <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">=</span> x
+        <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">=</span> y
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//class extension</span>
+<span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token keyword">extends</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+    constructor <span class="token punctuation">(</span>id<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//call parent constructor using super</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>width  <span class="token operator">=</span> width
+        <span class="token keyword">this</span><span class="token punctuation">.</span>height <span class="token operator">=</span> height
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token keyword">extends</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+    constructor <span class="token punctuation">(</span>id<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> radius<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//call parent constructor using super</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>radius <span class="token operator">=</span> radius
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="Enhanced-object-literals"><a href="#Enhanced-object-literals" class="headerlink" title="Enhanced object literals"></a>Enhanced object literals</h2><p>Bringing classes and object literals closer together. Some main enhancements:</p>
+<ul>
+<li>Shorthand notation when name and value use same name</li>
+<li>Supporting methods</li>
+<li>Property names by expression</li>
+</ul>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> litObject <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Shorthand for foo: foo’</span>
+    foo<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// Method properties</span>
+    <span class="token function">someMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// names by expression</span>
+    <span class="token punctuation">[</span><span class="token string">"foo"</span> <span class="token operator">+</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">10</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h2 id="Template-strings"><a href="#Template-strings" class="headerlink" title="Template strings"></a>Template strings</h2><p>ES6 now supports string interpolation</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//String interpolation using `` notation</span>
+<span class="token keyword">let</span> firstname <span class="token operator">=</span> <span class="token string">"John"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> lastname <span class="token operator">=</span> <span class="token string">"Doe"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> fullname <span class="token operator">=</span> <span class="token template-string"><span class="token string">`The fullname is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>firstname<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>lastname<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> and age is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token number">20</span><span class="token operator">+</span><span class="token number">10</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span></code></pre>
+<h2 id="Destructering-assignment"><a href="#Destructering-assignment" class="headerlink" title="Destructering assignment"></a>Destructering assignment</h2><p>ES6 introduces a new syntactic feature called destructuring. I can be used for declaration and assignment of variables. Two syntax are introduced: array destructuring and object destructuring.</p>
+<!-- more -->
+
+<h3 id="Array-declaration-destructuring"><a href="#Array-declaration-destructuring" class="headerlink" title="Array declaration destructuring"></a>Array declaration destructuring</h3><p>Destructuring uses the left hand side of the <code>=</code> assignment as a pattern for decomposing the right side array value output. Example</p>
+<p><strong>Before</strong></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//assigning array output to individual variable</span>
+<span class="token keyword">var</span> temp <span class="token operator">=</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> a <span class="token operator">=</span> temp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> b <span class="token operator">=</span> temp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> c <span class="token operator">=</span> temp<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<p><strong>Using destructuring:</strong></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></code></pre>
+<p>Destructuring uses the left hand side of the <code>=</code> assignment as a pattern for decomposing the right side array value output.</p>
+<h3 id="Object-declaration-destructuring"><a href="#Object-declaration-destructuring" class="headerlink" title="Object declaration destructuring"></a>Object declaration destructuring</h3><p>Similar with array destructuring we can define a pattern for assigning object property values. Example:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        x<span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">.</span>
+        y<span class="token punctuation">:</span><span class="token number">7</span><span class="token punctuation">,</span>
+        z<span class="token punctuation">:</span><span class="token number">8</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span>x<span class="token punctuation">,</span> y<span class="token punctuation">:</span>y<span class="token punctuation">,</span> z<span class="token punctuation">:</span>z<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>If the property name is the same, we can actually use a shorter syntax. This can be done by leaving out the <code>x:</code> (left) part of the declaration:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token punctuation">{</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> x<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The longer syntax is usefull when you want to assign a different name:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token punctuation">{</span>x<span class="token punctuation">:</span>bam<span class="token punctuation">,</span> y<span class="token punctuation">:</span>baz<span class="token punctuation">,</span> z<span class="token punctuation">:</span>bap<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>bam<span class="token punctuation">,</span> baz<span class="token punctuation">,</span> bap<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//6, 7, 8</span></code></pre>
+<p>Notice how the <code>{name:value}</code> synax is flipped into <code>{target-name: alias}</code> with will result in <code>{ alias: target-value}</code></p>
+<p>Also, assigning using destructuring you don’t need to assign al available values:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token punctuation">[</span><span class="token punctuation">,</span>b<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> <span class="token punctuation">{</span>x<span class="token punctuation">,</span> z<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2 id="Default-parameter-values"><a href="#Default-parameter-values" class="headerlink" title="Default parameter values"></a>Default parameter values</h2><p>There is now support for default parameter values</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> f <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">,</span> z <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> x <span class="token operator">+</span> y <span class="token operator">+</span> z
+<span class="token punctuation">}</span>
+<span class="token function">f</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token number">50</span></code></pre>
+<h2 id="Rest-parameter"><a href="#Rest-parameter" class="headerlink" title="Rest parameter"></a>Rest parameter</h2><p>Replacement for variable arguments. Aggregates arguments into a single argument using the triple dot <code>...</code> notation</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> f <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token operator">...</span>restParameter<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span> <span class="token operator">*</span> restParameter<span class="token punctuation">.</span>length
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//hello, true and 7 are collected in restParameter as an array</span>
+<span class="token function">f</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token number">9</span></code></pre>
+<h2 id="Spread-operator"><a href="#Spread-operator" class="headerlink" title="Spread operator"></a>Spread operator</h2><p>Spreading of elements of an iterable collection (like an array or even a string) into both literal elements and individual function parameters.</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//Function</span>
+<span class="token keyword">let</span> coordinates <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">point3D</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//implementation . . .</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">point3D</span><span class="token punctuation">(</span><span class="token operator">...</span>coordinates<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//String</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">"foo"</span>
+<span class="token keyword">let</span> barChars <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token operator">...</span>str <span class="token punctuation">]</span> <span class="token comment" spellcheck="true">// [ "f", "o", "o" ]</span></code></pre>
+<h2 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h2><p>Exporting/importing specific parts from modules</p>
+<h3 id="Export"><a href="#Export" class="headerlink" title="Export"></a>Export</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//export function and variable for SomeFile.js</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">let</span> par1 <span class="token operator">=</span> <span class="token number">1</span>
+
+<span class="token comment" spellcheck="true">//default export</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>par<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//implementation...</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//export from another module using wildcard * (like extending)</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">"AnotherModule"</span></code></pre>
+<h3 id="Import"><a href="#Import" class="headerlink" title="Import"></a>Import</h3><pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//import everything from SomeFile.js using wildcard *</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> somefile <span class="token keyword">from</span> <span class="token string">"SomeFile"</span>
+
+<span class="token comment" spellcheck="true">//import selectively</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>test<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"SomeFile"</span></code></pre>
+<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><p>Promises are a first class representation of a value that may be made available in the future. It solves the callback hell with aysynchronous programming.</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//function implementation returning a promise</span>
+<span class="token keyword">function</span> <span class="token function">someAsyncOperation</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//implementation details...</span>
+
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//implementation details...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">someAsyncOperation</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Do something with the result</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Handle error</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h2><ul>
+<li><a href="https://www.ecma-international.org/ecma-262/6.0/" target="_blank" rel="noopener">ECMAScript6 Specifications</a></li>
+<li><a href="http://es6-features.org/#Constants" target="_blank" rel="noopener">ES6 Features</a></li>
+<li><a href="https://github.com/lukehoban/es6features#readme" target="_blank" rel="noopener">ES Quick Overview</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/es6/" rel="tag"># es6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/04/11/2018/The-Scrum-Agile-Framework/" rel="next" title="The Scrum Agile Framework">
+                <i class="fa fa-chevron-left"></i> The Scrum Agile Framework
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/10/11/2018/Tmux-a-terminal-multiplexer/" rel="prev" title="Tmux, a terminal multiplexer">
+                Tmux, a terminal multiplexer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Karubin</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrow-functions"><span class="nav-number">1.</span> <span class="nav-text">Arrow functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables-and-scoping"><span class="nav-number">2.</span> <span class="nav-text">Variables and scoping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classes"><span class="nav-number">3.</span> <span class="nav-text">Classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enhanced-object-literals"><span class="nav-number">4.</span> <span class="nav-text">Enhanced object literals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Template-strings"><span class="nav-number">5.</span> <span class="nav-text">Template strings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Destructering-assignment"><span class="nav-number">6.</span> <span class="nav-text">Destructering assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Array-declaration-destructuring"><span class="nav-number">6.1.</span> <span class="nav-text">Array declaration destructuring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-declaration-destructuring"><span class="nav-number">6.2.</span> <span class="nav-text">Object declaration destructuring</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Default-parameter-values"><span class="nav-number">7.</span> <span class="nav-text">Default parameter values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rest-parameter"><span class="nav-number">8.</span> <span class="nav-text">Rest parameter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spread-operator"><span class="nav-number">9.</span> <span class="nav-text">Spread operator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modules"><span class="nav-number">10.</span> <span class="nav-text">Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Export"><span class="nav-number">10.1.</span> <span class="nav-text">Export</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Import"><span class="nav-number">10.2.</span> <span class="nav-text">Import</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promises"><span class="nav-number">11.</span> <span class="nav-text">Promises</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resources"><span class="nav-number">12.</span> <span class="nav-text">Resources</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Karubin</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

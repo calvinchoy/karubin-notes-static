@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":false,"b2t":false,"scrollpercent":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Scrum is a popular framework for implementing agile. This article describes some core concepts using notes I collected from various resources about the Scrum framework. Specific topics and techniques">
+<meta name="keywords" content="scrum,project management,agile,wip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Scrum Agile Framework">
+<meta property="og:url" content="http://notes.karubin.com/04/11/2018/The-Scrum-Agile-Framework/index.html">
+<meta property="og:site_name" content="Notes by Karubin">
+<meta property="og:description" content="Scrum is a popular framework for implementing agile. This article describes some core concepts using notes I collected from various resources about the Scrum framework. Specific topics and techniques">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-21T18:02:51.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Scrum Agile Framework">
+<meta name="twitter:description" content="Scrum is a popular framework for implementing agile. This article describes some core concepts using notes I collected from various resources about the Scrum framework. Specific topics and techniques">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://notes.karubin.com/04/11/2018/The-Scrum-Agile-Framework/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>The Scrum Agile Framework | Notes by Karubin</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes by Karubin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://notes.karubin.com/04/11/2018/The-Scrum-Agile-Framework/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karubin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes by Karubin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">The Scrum Agile Framework
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 04-11-2018 15:41:09" itemprop="dateCreated datePublished" datetime="2018-11-04T15:41:09+01:00">04-11-2018</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 21-07-2019 20:02:51" itemprop="dateModified" datetime="2019-07-21T20:02:51+02:00">21-07-2019</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/project-management/" itemprop="url" rel="index"><span itemprop="name">project management</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/software-development/" itemprop="url" rel="index"><span itemprop="name">software development</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Scrum is a popular framework for implementing agile. This article describes some core concepts using notes I collected from various resources about the Scrum framework. Specific topics and techniques will be discussed in seperate articles.</p>
+<a id="more"></a>
+
+
+
+<h2 id="Type-of-domains-to-solve"><a href="#Type-of-domains-to-solve" class="headerlink" title="Type of domains to solve"></a>Type of domains to solve</h2><h3 id="Complex-domain"><a href="#Complex-domain" class="headerlink" title="Complex domain"></a>Complex domain</h3><p>SCRUM can be usefull here as many things are still not clear and needs to be figured out. As the team needs to learn as the project advances SCRUM is a good way to get feedbacks early and learn more about the challenges as we go</p>
+<h3 id="Complicated-domain"><a href="#Complicated-domain" class="headerlink" title="Complicated domain"></a>Complicated domain</h3><p>These are often experts dominated domains like optimazations and performance issues in domain knowledge. Instead of SCRUM it is beter to have good understanding of the problem and consult expert for best practices/solution offered from experience.</p>
+<h3 id="Simple-domain"><a href="#Simple-domain" class="headerlink" title="Simple domain"></a>Simple domain</h3><p>Often relates to repeatable tasks. SCUM might be overkill as it is predictable we cna use the waterfall modell or applying best practices to approach these kinds of projects.</p>
+<h3 id="Disorder-domain"><a href="#Disorder-domain" class="headerlink" title="Disorder domain"></a>Disorder domain</h3><p>In a disorder domain you have no idea where the specific problems falls into. This is a dangerous domain, it is not whether which porject management methodology to use. Rather it is important to put the problems in specific domains first.</p>
+<h3 id="Chaotic-domain"><a href="#Chaotic-domain" class="headerlink" title="Chaotic domain"></a>Chaotic domain</h3><p>It is chaos, there is urgent needed. This is not the right time to SCRUM and making logs etc. Urgency is important, decission needs to be made immediately.</p>
+<h3 id="Interrupt-drive-domain"><a href="#Interrupt-drive-domain" class="headerlink" title="Interrupt drive domain"></a>Interrupt drive domain</h3><p>Quick fixes, support and services tasks falls into this domain. Things that migt or might not need urgency depending on the situation. Better approach might be the Kanban agile approach.</p>
+<h2 id="Sequential-vs-Agile-SCRUM-approach"><a href="#Sequential-vs-Agile-SCRUM-approach" class="headerlink" title="Sequential vs Agile SCRUM approach"></a>Sequential vs Agile SCRUM approach</h2><p>Development is different than production. In production we reproduce the same. In development we make changes and tend to make new things each time. When after development we are happy with what we have we can go into production and reproduce (i.e.  copy and paste).</p>
+<p>It is important to understand that one approach is not better then the other one. It all depends on the type of project and domain we are in.</p>
+<ul>
+<li>Plan-drive, sequential development assumes that we will get things right up front and all the different pieces will come together in the effort.</li>
+<li>SCRUM combines iterative and incremental development approaches<ul>
+<li><em>Iterative development</em> - Using multiple pass to improve product. Biggest downside is that in the presence we don’t know how much iteration we need.</li>
+<li><em>Incremental development</em> - Break product in smaller pieces, learn and adapt. The biggest drawback is that we might lose the big picture. Looking at trees but not the forest.</li>
+</ul>
+</li>
+</ul>
+<p>A scrum team typically consists of around seven people who work together in short, sustainable bursts of activity called sprints, with plenty of time for review and reflection built in. One of the mantras of scrum is “inspect and adapt,” and scrum teams are characterized by an intense focus on continuous improvement—of their process, but also of the product.</p>
+<h2 id="Roles"><a href="#Roles" class="headerlink" title="Roles"></a>Roles</h2><h3 id="Product-owner"><a href="#Product-owner" class="headerlink" title="Product owner"></a>Product owner</h3><ul>
+<li>Holds the vision for the product</li>
+<li>Represents the interests of the business</li>
+<li>Represents the customers</li>
+<li>Owns the product backlog</li>
+<li>Orders (prioritizes) the items in the product backlog</li>
+<li>Creates acceptance criteria for the backlog items</li>
+<li>Is available to answer team members’ questions</li>
+</ul>
+<h3 id="Scrum-master"><a href="#Scrum-master" class="headerlink" title="Scrum master"></a>Scrum master</h3><ul>
+<li>Scrum expert and advisor</li>
+<li>Coach</li>
+<li>Impediment bulldozer</li>
+<li>Facilitator</li>
+</ul>
+<h3 id="Team-member"><a href="#Team-member" class="headerlink" title="Team member"></a>Team member</h3><ul>
+<li>Responsible for completing user stories to incrementally increase the value of the product</li>
+<li>Self-organizes to get all of the necessary work done</li>
+<li>Creates and owns the estimates</li>
+<li>Owns the “ how to do the work” decisions</li>
+<li>Avoids siloed “not my job” thinking</li>
+</ul>
+<h2 id="Artifacts"><a href="#Artifacts" class="headerlink" title="Artifacts"></a>Artifacts</h2><h3 id="The-product-backlog"><a href="#The-product-backlog" class="headerlink" title="The product backlog"></a>The product backlog</h3><p>The product backlog is the cumulative list of desired deliverables for the product. This includes features, bug fixes, documentation changes, and anything else that might be meaningful and valuable to produce. Preferably ordered by importance.</p>
+<h4 id="Characteristics-of-good-product-logs-DEEP"><a href="#Characteristics-of-good-product-logs-DEEP" class="headerlink" title="Characteristics of good product logs (DEEP)"></a>Characteristics of good product logs (DEEP)</h4><ul>
+<li>Detailed appropriately - priority and small sized top</li>
+<li>Emergent - constantly updated</li>
+<li>Estimated - effort to develop the item</li>
+<li>Prioritized - prioritize the near-term items destined for following few sprints for optimize flow (too much to vs to little effects on contious flow)</li>
+</ul>
+<h4 id="Grooming"><a href="#Grooming" class="headerlink" title="Grooming"></a>Grooming</h4><p>Grooming refers to three principle activites: creating, refining, estimating and priotizing. While grooming is a collaborative activity, the product owner is the one to make de final decissions. Grooming is a constant process as the project advances more knowledge, feedback and experience will we acquired to adjust the product backlog accordingly.</p>
+<h4 id="Product-backlog-size-and-quantity"><a href="#Product-backlog-size-and-quantity" class="headerlink" title="Product backlog size and quantity"></a>Product backlog size and quantity</h4><p>General speaking you want one backlog for one product. However for large companies with large products this might not be possible or inefficient. We can split a product backlog hierarchically:</p>
+<ul>
+<li>Portfolio backlog (epics)</li>
+<li>Program backlog (features)</li>
+<li>Team backlog (sprintable stories)</li>
+</ul>
+<p>In general, it is recommended to let multiple teams work on differenct product backlogs vs one team working on several product backlogs. In the later case it might be better to merge the product backogs into one back one and prioritize accordingly.</p>
+<h3 id="User-stories"><a href="#User-stories" class="headerlink" title="User stories"></a>User stories</h3><p>User stories for a part can be compared with requirements in sequential planning. However, user stores are more relaxed and flexible as it is totally normal and acceptable that the stories evolve overtime as the team leads more. User stories invite people to discuss and talk bout the topic.</p>
+<h4 id="Ways-to-gather-stories"><a href="#Ways-to-gather-stories" class="headerlink" title="Ways to gather stories"></a>Ways to gather stories</h4><ul>
+<li>Workshop - Defining the user role -&gt; as a <role> I would like to be able to <action> so that &lt;benefit/value&gt;. Using personas, topdown or bottom up approach.</action></role></li>
+<li>Story mapping -  Epic -&gt; themes -&gt; stories, decompose big to small. Prioritize vertically.</li>
+</ul>
+<h4 id="INVEST-in-good-stories"><a href="#INVEST-in-good-stories" class="headerlink" title="INVEST in good stories"></a>INVEST in good stories</h4><ul>
+<li>Independent</li>
+<li>Negotiable</li>
+<li>Valuable</li>
+<li>Estimatable</li>
+<li>Small</li>
+</ul>
+<h3 id="The-spring-backlog"><a href="#The-spring-backlog" class="headerlink" title="The spring backlog"></a>The spring backlog</h3><p>The sprint backlog is the cumulative list of desired deliverables for the product for the next sprint. This includes features, bug fixes, documentation changes, and anything else that might be meaningful and valuable to produce. Includes:</p>
+<ul>
+<li>Selection of stories (deliverables)<ul>
+<li>Tasks</li>
+</ul>
+</li>
+</ul>
+<h3 id="Burncharts"><a href="#Burncharts" class="headerlink" title="Burncharts"></a>Burncharts</h3><p>A burn chart shows us the relationship between time and scope. Time is on the horizontal X-axis and scope is on the vertical Y-axis. A burn up chart shows us how much scope the team has got done over a period of time.</p>
+<h3 id="Task-board-Kanban"><a href="#Task-board-Kanban" class="headerlink" title="Task board (Kanban)"></a>Task board (Kanban)</h3><p>The simplest task board consists of three columns: to do, doing and done. Tasks move across the board, providing visibility regarding which tasks are done, which are in progress, and which are yet to be started.</p>
+<h2 id="The-sprint-cycle-average-of-2-weeks"><a href="#The-sprint-cycle-average-of-2-weeks" class="headerlink" title="The sprint cycle (average of 2 weeks)"></a>The sprint cycle (average of 2 weeks)</h2><ol>
+<li>Sprint planning (2hrs)</li>
+<li>Daily standups (15 mins)</li>
+<li>Story time (1x per week)</li>
+<li>Sprint review (30 mins)</li>
+<li>Retrospective (90 mins)</li>
+</ol>
+<h2 id="Resources"><a href="#Resources" class="headerlink" title="Resources:"></a>Resources:</h2><ul>
+<li>[Book] SCRUM: a breathtakingly brief and agile introduction</li>
+<li>[Book] Essential SCRUM: a pratical guide to the most popular agile process</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scrum/" rel="tag"># scrum</a>
+          
+            <a href="/tags/project-management/" rel="tag"># project management</a>
+          
+            <a href="/tags/agile/" rel="tag"># agile</a>
+          
+            <a href="/tags/wip/" rel="tag"># wip</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/02/11/2018/OOP-JavaScript-Summary/" rel="next" title="OOP JavaScript Summary">
+                <i class="fa fa-chevron-left"></i> OOP JavaScript Summary
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/06/11/2018/ES6-Fundamentals/" rel="prev" title="ES6 Fundamentals">
+                ES6 Fundamentals <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Karubin</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-of-domains-to-solve"><span class="nav-number">1.</span> <span class="nav-text">Type of domains to solve</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Complex-domain"><span class="nav-number">1.1.</span> <span class="nav-text">Complex domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Complicated-domain"><span class="nav-number">1.2.</span> <span class="nav-text">Complicated domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-domain"><span class="nav-number">1.3.</span> <span class="nav-text">Simple domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disorder-domain"><span class="nav-number">1.4.</span> <span class="nav-text">Disorder domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chaotic-domain"><span class="nav-number">1.5.</span> <span class="nav-text">Chaotic domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt-drive-domain"><span class="nav-number">1.6.</span> <span class="nav-text">Interrupt drive domain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequential-vs-Agile-SCRUM-approach"><span class="nav-number">2.</span> <span class="nav-text">Sequential vs Agile SCRUM approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Roles"><span class="nav-number">3.</span> <span class="nav-text">Roles</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Product-owner"><span class="nav-number">3.1.</span> <span class="nav-text">Product owner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrum-master"><span class="nav-number">3.2.</span> <span class="nav-text">Scrum master</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Team-member"><span class="nav-number">3.3.</span> <span class="nav-text">Team member</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Artifacts"><span class="nav-number">4.</span> <span class="nav-text">Artifacts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-product-backlog"><span class="nav-number">4.1.</span> <span class="nav-text">The product backlog</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Characteristics-of-good-product-logs-DEEP"><span class="nav-number">4.1.1.</span> <span class="nav-text">Characteristics of good product logs (DEEP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Grooming"><span class="nav-number">4.1.2.</span> <span class="nav-text">Grooming</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Product-backlog-size-and-quantity"><span class="nav-number">4.1.3.</span> <span class="nav-text">Product backlog size and quantity</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-stories"><span class="nav-number">4.2.</span> <span class="nav-text">User stories</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ways-to-gather-stories"><span class="nav-number">4.2.1.</span> <span class="nav-text">Ways to gather stories</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#INVEST-in-good-stories"><span class="nav-number">4.2.2.</span> <span class="nav-text">INVEST in good stories</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-spring-backlog"><span class="nav-number">4.3.</span> <span class="nav-text">The spring backlog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Burncharts"><span class="nav-number">4.4.</span> <span class="nav-text">Burncharts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-board-Kanban"><span class="nav-number">4.5.</span> <span class="nav-text">Task board (Kanban)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-sprint-cycle-average-of-2-weeks"><span class="nav-number">5.</span> <span class="nav-text">The sprint cycle (average of 2 weeks)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resources"><span class="nav-number">6.</span> <span class="nav-text">Resources:</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Karubin</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
