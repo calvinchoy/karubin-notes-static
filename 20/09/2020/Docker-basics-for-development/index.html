@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false,"dimmer":false,"b2t":false,"scrollpercent":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="An overview of some core commands for running docker containers for development purposes. Installation and on why use docker will not be explained here, refer to the official docker documentation for">
+<meta name="keywords" content="devops,docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker basics for development">
+<meta property="og:url" content="http://notes.karubin.com/20/09/2020/Docker-basics-for-development/index.html">
+<meta property="og:site_name" content="Notes by Karubin">
+<meta property="og:description" content="An overview of some core commands for running docker containers for development purposes. Installation and on why use docker will not be explained here, refer to the official docker documentation for">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-09-20T15:23:33.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker basics for development">
+<meta name="twitter:description" content="An overview of some core commands for running docker containers for development purposes. Installation and on why use docker will not be explained here, refer to the official docker documentation for">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://notes.karubin.com/20/09/2020/Docker-basics-for-development/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Docker basics for development | Notes by Karubin</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css"></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes by Karubin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://notes.karubin.com/20/09/2020/Docker-basics-for-development/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Karubin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes by Karubin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker basics for development
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 20-09-2020 16:49:42 / Modified: 17:23:33" itemprop="dateCreated datePublished" datetime="2020-09-20T16:49:42+02:00">20-09-2020</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>An overview of some core commands for running docker containers for development purposes. Installation and on why use docker will not be explained here, refer to the official docker documentation for more that. These are just some notes that I made while learning the basics of docker for local development usage.</p>
+<a id="more"></a>
+
+<h2 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h2><p>Use docker container virtualization to spin up a development environment. For example: nginx server and a database. The container will expose ports to connect to from your local (host) machine to the container (guest machine). </p>
+<p>Containers can be ran from command line, or from a <code>docker-compose.yml</code> file. The later one is recommended as it will save you from retyping the cli commands everytime and also a best practice in term of versioning configuration management. Below are some basic concepts you need to understand while using containers for local development:</p>
+<ul>
+<li>Run each service as a separate container</li>
+<li>Run containers as daemon in background (<code>-d</code>) and access it using the exposed port</li>
+<li>Data can be managed using volumes, this allows you to persist your data when a container is destroyed</li>
+<li>Network among containers are set by default by docker, don’t use IP address use the container name which will be aliased to vpn created by docker when multiple containers are ran</li>
+<li>Dockerfile - is like a recipe to create your own image file which can then be used to spin containers from</li>
+<li><code>docker-compose.yml</code> - orchestrate executing your containers by means of configuration file instead of the docker cli</li>
+</ul>
+<h2 id="Running-new-container"><a href="#Running-new-container" class="headerlink" title="Running new container"></a>Running new container</h2><pre class=" language-bash"><code class="language-bash">docker container run -it -d -p 8080:80 --name web nginx</code></pre>
+<p>When this command is ran the following is happening</p>
+<ol>
+<li>Docker checks if it can find an image called nginx. If not it will download the latest from repository</li>
+<li>Docker wil run a container using the supplied image</li>
+<li><code>-d</code> means it will detach after running</li>
+<li><code>-it</code> mean it will create a tty terminal for it</li>
+<li><code>--name</code> top give an alias name</li>
+<li><code>-p</code> stands for publish and will configure NAT rules <code>host:container</code> to open ports for communication</li>
+<li>You can now access your server on port 8080 on your computer (host) to connect to port 80 from the container (nginx default port)</li>
+</ol>
+<h2 id="Inspecting-container-processes"><a href="#Inspecting-container-processes" class="headerlink" title="Inspecting container processes"></a>Inspecting container processes</h2><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># list running containers</span>
+docker container <span class="token function">ls</span>
+<span class="token comment" spellcheck="true"># check container run logs while running, using -f flag</span>
+docker container logs -f <span class="token operator">&lt;</span>container<span class="token operator">></span>
+<span class="token comment" spellcheck="true"># process list in one container</span>
+docker container <span class="token function">top</span> <span class="token operator">&lt;</span>container<span class="token operator">></span>
+<span class="token comment" spellcheck="true"># details of one container config</span>
+docker container inspect <span class="token operator">&lt;</span>container<span class="token operator">></span>
+<span class="token comment" spellcheck="true"># performance for all containers</span>
+docker container stats</code></pre>
+<h2 id="Getting-shell-access-to-a-container"><a href="#Getting-shell-access-to-a-container" class="headerlink" title="Getting shell access to a container"></a>Getting shell access to a container</h2><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># When running a new container</span>
+docker container run -it <span class="token punctuation">..</span><span class="token punctuation">..</span>
+<span class="token comment" spellcheck="true"># When restarting a container</span>
+docker container start -ai <span class="token operator">&lt;</span>container<span class="token operator">></span>
+<span class="token comment" spellcheck="true"># Attach to running container</span>
+docker container <span class="token function">exec</span> -it <span class="token operator">&lt;</span>container<span class="token operator">></span> <span class="token operator">&lt;</span>command i.e. bash<span class="token operator">></span></code></pre>
+<h2 id="Docker-Networking"><a href="#Docker-Networking" class="headerlink" title="Docker Networking"></a>Docker Networking</h2><p>Docker use defaults that most of the time just works for networking. When a container is created by docker it will create a default virtual private network. By specifying the -p option it will configure a NAT rule between the <code>host_port:container_port</code>.</p>
+<p>All containers inside the same vpn can see each other using their virtual IP address. We can create multiple vpn can attach/detach container to one or more networks<a href="http://networks.By" target="_blank" rel="noopener">.</a> By default, DNS daemon is built-in the docker networks and the container name is used as host names that resolves to their corresponding ip address → don’t rely on ip addresses</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Check open ports</span>
+docker container port <span class="token operator">&lt;</span>container<span class="token operator">></span>
+
+<span class="token comment" spellcheck="true"># Check ip address</span>
+docker container inspect --format <span class="token string">'{{.NetworkSettings.IPAddress}}'</span> <span class="token operator">&lt;</span>container<span class="token operator">></span></code></pre>
+<h3 id="Network-CLI-Management"><a href="#Network-CLI-Management" class="headerlink" title="Network CLI-Management"></a>Network CLI-Management</h3><pre class=" language-bash"><code class="language-bash">docker network <span class="token function">ls</span>
+docker network create
+docker network inspect
+docker network connect
+docker network disconnect</code></pre>
+<h2 id="Container-lifecycle-and-data-management"><a href="#Container-lifecycle-and-data-management" class="headerlink" title="Container lifecycle and data management"></a>Container lifecycle and data management</h2><p>Containers are used to be immutable and ephemeral, that is it should be disposable and we can recreate them anytime from an image when that is needed or when we want to deploy a new updates version of the container. What important is the separate of concern regarding the data that is stored and mutated by the application running inside the container.</p>
+<p>Docker offers two way of persistent data mangement:</p>
+<ol>
+<li>volume mounts — where the persistent data is stored to a location outside of the container</li>
+<li>bind mounts — link a container path to a path on the hosts, like symlinking</li>
+</ol>
+<h3 id="Data-volumes"><a href="#Data-volumes" class="headerlink" title="Data volumes"></a>Data volumes</h3><p>Some images uses volumes to maintain persistent data. That data is not automatically deleted when the container is stopped or removed. You will need an extra step to remove the data from the volume mount location. It is recommended to specify a named path when using volume data mounting.</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># inspect image to check for default volume mount</span>
+docker image inspect <span class="token operator">&lt;</span>image name<span class="token operator">></span>
+
+<span class="token comment" spellcheck="true"># aliasing a volume mount</span>
+docker container run -it -d -p -v volumeName:/path/to/volume --name web mysql
+
+<span class="token comment" spellcheck="true"># listing persistent volumes on host</span>
+docker volume <span class="token function">ls</span></code></pre>
+<h3 id="Bind-mounting"><a href="#Bind-mounting" class="headerlink" title="Bind mounting"></a>Bind mounting</h3><p>This is like symlink of directories but instead you are making a link between a host directory to directory inside the container. This is often useful for development. While a data volume can be specified in a dockerfile, bind mounting cannot and needs to be specified during container run.</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># to map to host current directory you can use $(pwd)</span>
+docker container run -it -d -p 8080:80 -v /path/on/host:/path/on/container --name web nginx</code></pre>
+<h2 id="Docker-file"><a href="#Docker-file" class="headerlink" title="Docker file"></a>Docker file</h2><blockquote>
+<p>A Dockerfile is like a recipe for creating an image which can then be used to run a container from it</p>
+</blockquote>
+<p>The <code>Dockerfile</code> will be used to specify and provision your image when it is ran as container. For example, things to include in dockerfiles:</p>
+<ul>
+<li>FROM, base image to extend from</li>
+<li>ENV, environment variables</li>
+<li>RUN, commands to run during setup in container</li>
+<li>EXPOSE, export ports</li>
+<li>CMD, command to execute after container is up</li>
+</ul>
+<p>Note: When creating docker file make sure that things that change the less are at the top, and the most at the bottom. This has to do that each step in the <code>Dockerfile</code> is hashed and unless there are changes it does not have to rebuild.</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><pre class=" language-jsx"><code class="language-jsx"><span class="token comment" spellcheck="true">//use default nginx image as basis to extend</span>
+FROM nginx<span class="token punctuation">:</span>latesst
+
+<span class="token comment" spellcheck="true">//change directory inside container</span>
+WORKDIR <span class="token operator">/</span>usr<span class="token operator">/</span>share<span class="token operator">/</span>nginx<span class="token operator">/</span>html
+
+<span class="token comment" spellcheck="true">//copy file from host to container</span>
+COPY index<span class="token punctuation">.</span>html index<span class="token punctuation">.</span>html</code></pre>
+<h3 id="Building-an-image"><a href="#Building-an-image" class="headerlink" title="Building an image"></a>Building an image</h3><pre class=" language-jsx"><code class="language-jsx">docker iamge build <span class="token operator">-</span>t <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span> <span class="token operator">&lt;</span>path<span class="token operator">/</span>to<span class="token operator">/</span>dockerfile<span class="token operator">/</span>target<span class="token operator">></span></code></pre>
+<ul>
+<li><code>-t</code>, tagging image with a name</li>
+</ul>
+<h2 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker compose"></a>Docker compose</h2><p>Instead of running docker cli commands manually to manage your containers you can use a <code>.yml</code> file to specify it in a template format. This makes it easy for version management and distribution across teams. Docker compose is mainly used for local development.d</p>
+<h3 id="Structure-of-a-basic-docker-compose-file"><a href="#Structure-of-a-basic-docker-compose-file" class="headerlink" title="Structure of a basic docker compose file"></a>Structure of a basic docker compose file</h3><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.0'</span>
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#list the containers you want to run</span>
+    <span class="token key atrule">servicename1</span><span class="token punctuation">:</span>
+        <span class="token key atrule">image</span><span class="token punctuation">:</span>
+        <span class="token key atrule">build</span><span class="token punctuation">:</span>
+            <span class="token key atrule">context</span><span class="token punctuation">:</span>
+            <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span>
+        <span class="token key atrule">command</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+        <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+
+    <span class="token key atrule">servicename2</span><span class="token punctuation">:</span>
+        <span class="token key atrule">image</span><span class="token punctuation">:</span>
+        <span class="token key atrule">command</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+        <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+
+<span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+
+<span class="token key atrule">networks</span><span class="token punctuation">:</span>
+</code></pre>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><p>Below will run two containers. One for drupal and one for postgres. The configuration details can be found on docker hub image file documentation or you can use <code>docker image inspect</code> after the image is pulled in using <code>docker pull</code>.</p>
+<pre class=" language-jsx"><code class="language-jsx">version<span class="token punctuation">:</span> <span class="token string">'3'</span>
+
+services<span class="token punctuation">:</span>
+    drupal<span class="token punctuation">:</span>
+        image<span class="token punctuation">:</span> druppal
+        ports<span class="token punctuation">:</span>
+            <span class="token string">"8080"</span><span class="token punctuation">:</span><span class="token string">"80"</span>
+        volumes<span class="token punctuation">:</span>
+            <span class="token operator">...</span>
+    postgres<span class="token punctuation">:</span>
+        image<span class="token punctuation">:</span> postgres
+        environment<span class="token punctuation">:</span>
+            POSTGRES_PASSWORD<span class="token operator">=</span>somepassword
+
+volumes<span class="token punctuation">:</span>
+        <span class="token operator">...</span></code></pre>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/devops/" rel="tag"># devops</a>
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/14/11/2018/Scrum-Estimation-and-Sizing/" rel="next" title="Scrum: Estimation and Sizing">
+                <i class="fa fa-chevron-left"></i> Scrum: Estimation and Sizing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Karubin</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concept"><span class="nav-number">1.</span> <span class="nav-text">Concept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Running-new-container"><span class="nav-number">2.</span> <span class="nav-text">Running new container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inspecting-container-processes"><span class="nav-number">3.</span> <span class="nav-text">Inspecting container processes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-shell-access-to-a-container"><span class="nav-number">4.</span> <span class="nav-text">Getting shell access to a container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Networking"><span class="nav-number">5.</span> <span class="nav-text">Docker Networking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-CLI-Management"><span class="nav-number">5.1.</span> <span class="nav-text">Network CLI-Management</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container-lifecycle-and-data-management"><span class="nav-number">6.</span> <span class="nav-text">Container lifecycle and data management</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-volumes"><span class="nav-number">6.1.</span> <span class="nav-text">Data volumes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bind-mounting"><span class="nav-number">6.2.</span> <span class="nav-text">Bind mounting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-file"><span class="nav-number">7.</span> <span class="nav-text">Docker file</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">7.1.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-an-image"><span class="nav-number">7.2.</span> <span class="nav-text">Building an image</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-compose"><span class="nav-number">8.</span> <span class="nav-text">Docker compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Structure-of-a-basic-docker-compose-file"><span class="nav-number">8.1.</span> <span class="nav-text">Structure of a basic docker compose file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-1"><span class="nav-number">8.2.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Karubin</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
